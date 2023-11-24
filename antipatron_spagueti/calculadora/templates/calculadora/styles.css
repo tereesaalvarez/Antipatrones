@@ -1,0 +1,61 @@
+/* style.css */
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    overflow: hidden;
+    background-image: url('hundred-burgers.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+#calculadora {
+    width: 300px;
+    margin: 20px auto;
+    border: 2px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#inputNumbers {
+    width: calc(100% - 20px);
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#info {
+    font-size: 18px;
+    color: green;
+    margin-bottom: 10px;
+}
+
+.seccion {
+    margin-top: 20px;
+}
+
+button {
+    padding: 15px 20px;
+    font-size: 16px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #ffa500;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #ff8c00;
+}
+
+.grande {
+    font-size: 24px;
+    color: blue;
+}
