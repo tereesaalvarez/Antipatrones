@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora WEB</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            overflow: hidden; /* Evitar barras de desplazamiento por el video */
+            background-image: url('hundred-burgers.jpg'); /* Reemplaza 'nombre_de_tu_imagen.jpg' con el nombre de tu imagen */
+            background-size: cover;
+            background-position: center;
+        }
+
+
+        #calculadora {
+            width: 300px;
+            margin: 20px auto;
+            border: 2px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #inputNumbers {
+            width: calc(100% - 20px);
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #info {
+            font-size: 18px;
+            color: green;
+            margin-bottom: 10px;
+        }
+
+        .seccion {
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 15px 20px;
+            font-size: 16px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #ffa500; /* Color naranja */
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #ff8c00; /* Color naranja más oscuro al pasar el cursor */
+        }
+
+        .grande {
+            font-size: 24px;
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="calculadora">
+        <h1>Calculadora WEB</h1>
+
+        <input type="text" id="inputNumbers" placeholder="Introduce números o realiza operaciones binarias">
+
+        <div id="info"></div>
+
+        <div class="seccion" id="operadores">
+            <h2>Operadores Binarios</h2>
+            <button onclick="guardarOperador('+')">+</button>
+            <button onclick="guardarOperador('-')">-</button>
+            <button onclick="guardarOperador('*')">*</button>
+            <button onclick="guardarOperador('/')">/</button>
+            <button onclick="calcularResultado('')">=</button>
+        </div>
+
+        <div class="seccion" id="operadores-exponenciales">
+            <h2>Operadores Exponenciales</h2>
+            <button onclick="calcularCuadrado()">^2</button>
+            <button onclick="calcularCubo()">^3</button>
+        </div>
+
+        <div class="seccion" id="operaciones-csv">
+            <h2>Operaciones CSV</h2>
+            <button id="sumatorio" onclick="sumatorio()">Sumatorio</button>
+            <button id="ordenar" onclick="ordenar()">Ordenar</button>
+            <button id="revertir" onclick="revertir()">Revertir</button>
+            <button id="quitar" onclick="quitar()">Quitar Último</button>
+        </div>
+
+        <div class="seccion" id="operaciones-unitarias">
+            <h2>Operaciones Unitarias</h2>
+            <button id="modulo" onclick="mod()">Módulo</button>
+            <button id="factorial" onclick="fact()">Factorial</button>
+        </div>
+
+        <script>
+            let primerNumero = 0;
+            let operador = '';
+            let numeros = [];
+    
+            function guardarOperador(op) {
+                const input = document.getElementById('inputNumbers').value;
+                primerNumero = parseFloat(input);
+    
+                if (!Number.isNaN(primerNumero)) {
+                    operador = op;
+                    document.getElementById('inputNumbers').value = '';
+                } else {
+                    alert('Error: Introduce un número válido como primer operando.');
+                }
+            }
+    
+            function calcularResultado() {
+                const input = document.getElementById('inputNumbers').value;
+                const segundoNumero = parseFloat(input);
+    
+                if (!Number.isNaN(segundoNumero)) {
+                    let resultado;
+    
+                    switch (operador) {
+                        case '+':
+                            resultado = primerNumero + segundoNumero;
+                            break;
+                        case '-':
+                            resultado = primerNumero - segundoNumero;
+                            break;
+                        case '*':
+                            resultado = primerNumero * segundoNumero;
+                            break;
+                        case '/':
+                            resultado = primerNumero / segundoNumero;
+                            break;
+                        default:
+                            break;
+                    }
+    
+                    document.getElementById('inputNumbers').value = resultado;
+                    actualizarInfo(resultado);
+                } else {
+                    alert('Error: Introduce un número válido como segundo operando.');
+                }
+            }
+            function calcularCuadrado() {
+                const input = document.getElementById('inputNumbers').value;
+                const numero = parseFloat(input);
+
+                if (!Number.isNaN(numero)) {
+                    const cuadrado = numero ** 2;
+                    document.getElementById('inputNumbers').value = cuadrado;
+                    actualizarInfo(cuadrado);
+                } else {
+                    alert('Error: Introduce un número válido.');
+                }
+            }
+
+            function calcularCubo() {
+                const input = document.getElementById('inputNumbers').value;
+                const numero = parseFloat(input);
+
+                if (!Number.isNaN(numero)) {
+                    const cubo = numero ** 3;
+                    document.getElementById('inputNumbers').value = cubo;
+                    actualizarInfo(cubo);
+                } else {
+                    alert('Error: Introduce un número válido.');
+                }
+            }
+
+            function sumatorio() {
+                const input = document.getElementById('inputNumbers').value;
+                const numerosArray = input.split(',').map(Number);
+
+                const sum = numerosArray.reduce((a, b) => a + b, 0);
+                document.getElementById('inputNumbers').value = sum;
+                actualizarInfo(sum);
+            }
+
+            function ordenar() {
+                const input = document.getElementById('inputNumbers').value;
+                const numerosArray = input.split(',').map(Number);
+
+                numerosArray.sort((a, b) => a - b);
+                document.getElementById('inputNumbers').value = numerosArray.join(',');
+                actualizarInfo(numerosArray);
+            }
+
+            function revertir() {
+                const input = document.getElementById('inputNumbers').value;
+                const numerosArray = input.split(',').map(Number);
+
+                numerosArray.reverse();
+                document.getElementById('inputNumbers').value = numerosArray.join(',');
+                actualizarInfo(numerosArray);
+            }
+
+            function quitar() {
+                const input = document.getElementById('inputNumbers').value;
+                const numerosArray = input.split(',');
+
+                numerosArray.pop();
+                document.getElementById('inputNumbers').value = numerosArray.join(',');
+                actualizarInfo(numerosArray);
+            }
+
+            function mod() {
+                const input = document.getElementById('inputNumbers').value;
+                const numero = parseFloat(input);
+
+                if (!Number.isNaN(numero)) {
+                    const resultado = numero < 0 ? -numero : numero;
+                    document.getElementById('inputNumbers').value = resultado;
+                    actualizarInfo(resultado);
+                } else {
+                    alert('Error: Introduce un número válido.');
+                }
+            }
+
+            function fact() {
+                const input = document.getElementById('inputNumbers').value;
+                const numero = parseInt(input);
+
+                if (!Number.isNaN(numero) && numero >= 0) {
+                    let factorial = 1;
+
+                    for (let i = 2; i <= numero; i++) {
+                        factorial *= i;
+                    }
+
+                    document.getElementById('inputNumbers').value = factorial;
+                    actualizarInfo(factorial);
+                } else {
+                    alert('Error: Introduce un número entero no negativo válido.');
+                }
+            }
+
+            function resetCalculadora() {
+                primerNumero = 0;
+                operador = '';
+                numeros = [];
+                document.getElementById('inputNumbers').value = '';
+                document.getElementById('info').textContent = 'Info sobre el número';
+            }
+
+            function actualizarInfo(resultado) {
+                const infoElement = document.getElementById('info');
+
+                if (resultado < 100) {
+                    infoElement.textContent = 'Info: El resultado es menor que 100';
+                } else if (resultado >= 100 && resultado <= 200) {
+                    infoElement.textContent = 'Info: El resultado está entre 100 y 200';
+                } else {
+                    infoElement.textContent = 'Info: El resultado es superior a 200';
+                }
+            }
+        </script>
+
+        
+</body>
+
+</html>
