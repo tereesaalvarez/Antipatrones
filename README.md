@@ -1,5 +1,8 @@
 # Antipatrones
 
+El link de este repositorio es: https://github.com/tereesaalvarez/Antipatrones.git
+
+## Enunciado ejercicio
 Dada una porción de código Python escrita en estilo "Spaghetti Code", se te pide que identifiques las principales características de este antipatrón y refactorices el código para mejorar su legibilidad y mantenibilidad.
 
 Considera el siguiente fragmento de código:
