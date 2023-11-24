@@ -32,7 +32,8 @@ También se incluye el uso de cadenas de texto para control de flujo lo que pued
 
 #### Refactorización del código
 
-* Código refactorizado:
+Código refactorizado:
+
 
     def sumar(num1, num2):
         return num1 + num2
@@ -62,7 +63,8 @@ También se incluye el uso de cadenas de texto para control de flujo lo que pued
         'division': dividir
     }
 
-* Ejemplo de uso:
+Ejemplo de uso:
+
 
      try:
          resultado = calcular('suma', 5, 3)
